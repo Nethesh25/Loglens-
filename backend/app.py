@@ -23,6 +23,7 @@ def home():
 
 @app.route("/upload", methods=["POST"])
 def upload():
+    print("========== UPLOAD ROUTE HIT ==========")
 
     global latest_logs
 
