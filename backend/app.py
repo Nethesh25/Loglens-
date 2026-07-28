@@ -36,6 +36,9 @@ def upload():
 
     filepath = os.path.join(UPLOAD_FOLDER, file.filename)
     file.save(filepath)
+    print("Saved file:", filepath)
+
+    print("Exists:", os.path.exists(filepath))
 
     # Convert generator to list
     logs = list(parse_log(filepath))
