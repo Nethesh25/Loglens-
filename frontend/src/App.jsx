@@ -42,7 +42,7 @@ function App() {
 
       const response = await axios.post(
 
-        "http://127.0.0.1:5000/upload",
+        "https://loglens-backend-f6yg.onrender.com/upload",
 
         formData
 
@@ -72,7 +72,7 @@ function App() {
 
       const response = await axios.get(
 
-        "http://127.0.0.1:5000/demo"
+        "https://loglens-backend-f6yg.onrender.com/demo"
 
       );
 
@@ -94,7 +94,7 @@ function App() {
 
     window.open(
 
-      "http://127.0.0.1:5000/export",
+      "https://loglens-backend-f6yg.onrender.com/export",
 
       "_blank"
 
