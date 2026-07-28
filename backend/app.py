@@ -25,7 +25,7 @@ def home():
     return "LogLens Backend Running 🚀"
 
 
-@app.route("/upload", methods=["POST"])
+@app.route("/upload", methods=["POST", "OPTIONS"])
 def upload():
     print("========== UPLOAD ROUTE HIT ==========")
 
