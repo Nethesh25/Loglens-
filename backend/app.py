@@ -25,9 +25,10 @@ def home():
     return "LogLens Backend Running 🚀"
 
 
-@app.route("/upload", methods=["POST", "OPTIONS"])
+@app.route("/upload", methods=["POST"])
 def upload():
-    print("========== UPLOAD ROUTE HIT ==========")
+
+    print("UPLOAD ENDPOINT HIT")
 
     global latest_logs
 
