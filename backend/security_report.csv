@@ -1,0 +1,14 @@
+IP,Method,Status,Attack,Severity,Path
+172.16.1.11,GET,200,Normal,Low,/home
+172.16.1.22,GET,200,Normal,Low,/images/logo.png
+172.16.1.33,GET,403,Normal,Low,/admin
+172.16.1.44,GET,403,Directory Traversal,High,/../../windows/system32/config
+172.16.1.55,POST,401,SQL Injection,High,/login?username=admin'--
+172.16.1.66,GET,200,Normal,Low,/search?q=img
+172.16.1.77,GET,404,Normal,Low,/.git/config
+172.16.1.88,POST,401,Unauthorized Access,Medium,/login
+172.16.1.88,POST,401,Unauthorized Access,Medium,/login
+172.16.1.88,POST,401,Unauthorized Access,Medium,/login
+172.16.1.99,GET,200,Normal,Low,/dashboard
+172.16.1.110,GET,200,Normal,Low,/api/orders
+172.16.1.121,GET,404,Normal,Low,/backup.sql
