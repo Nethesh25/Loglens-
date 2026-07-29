@@ -27,44 +27,36 @@ def home():
 
 @app.route("/upload", methods=["POST"])
 def upload():
-
-    print("UPLOAD ENDPOINT HIT")
-
     global latest_logs
+    try:
+        if "file" not in request.files:
+            return jsonify({"error": "No file selected"}), 400
 
-    if "file" not in request.files:
-        return jsonify({"error": "No file selected"}), 400
+        file = request.files["file"]
+        if file.filename == "":
+            return jsonify({"error": "Empty filename"}), 400
 
-    file = request.files["file"]
+        filepath = os.path.join(UPLOAD_FOLDER, file.filename)
+        file.save(filepath)
 
-    if file.filename == "":
-        return jsonify({"error": "Empty filename"}), 400
+        logs = list(parse_log(filepath))
 
-    filepath = os.path.join(UPLOAD_FOLDER, file.filename)
-    file.save(filepath)
-    print("Saved file:", filepath)
+        if not logs:
+            return jsonify({"error": "No valid log lines found. Check the file format."}), 400
 
-    print("Exists:", os.path.exists(filepath))
+        for log in logs:
+            result = detect_attack(log)
+            log["attack"] = result["attack"]
+            log["severity"] = result["severity"]
 
-    # Convert generator to list
-    logs = list(parse_log(filepath))
+        summary = generate_summary(logs)
+        latest_logs = logs
 
-    # Detect attacks
-    for log in logs:
-        result = detect_attack(log)
-        log["attack"] = result["attack"]
-        log["severity"] = result["severity"]
+        return jsonify({"logs": logs, "summary": summary})
 
-    # Generate summary
-    summary = generate_summary(logs)
-
-    # Save for export
-    latest_logs = logs
-
-    return jsonify({
-        "logs": logs,
-        "summary": summary
-    })
+    except Exception as e:
+        print("UPLOAD ERROR:", e)
+        return jsonify({"error": str(e)}), 500
 
 
 @app.route("/demo", methods=["GET"])
