@@ -42,7 +42,7 @@ function App() {
 
       const response = await axios.post(
 
-        "https://loglens-backend-f6yg.onrender.com/upload",
+        "http://127.0.0.1:5000/upload",
 
         formData
 
@@ -53,12 +53,15 @@ function App() {
       setSummary(response.data.summary);
 
     } catch (err) {
+  console.error(err);
 
-      console.log(err);
+  if (err.response) {
+    console.log("Status:", err.response.status);
+    console.log("Data:", err.response.data);
+  }
 
-      alert("Upload Failed");
-
-    }
+  alert(err.response?.data?.error || err.message);
+}
 
     setLoading(false);
 
@@ -72,7 +75,7 @@ function App() {
 
       const response = await axios.get(
 
-        "https://loglens-backend-f6yg.onrender.com/demo"
+        "http://127.0.0.1:5000/demo"
 
       );
 
@@ -94,7 +97,7 @@ function App() {
 
     window.open(
 
-      "https://loglens-backend-f6yg.onrender.com/export",
+      "http://127.0.0.1:5000/export",
 
       "_blank"
 

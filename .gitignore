@@ -9,6 +9,8 @@ frontend/dist/
 
 # Logs
 *.log
+!backend/demo_logs/demo.log
+!backend/demo_logs/access.log
 
 # Environment
 .env
